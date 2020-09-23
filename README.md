@@ -1,4 +1,6 @@
-# metr-frontend
+# Frontend app for Online shop Metr
+
+Application contains 2 pages: Authors and Books
 
 ## Project setup
 ```
@@ -28,7 +30,3 @@ npm run test:e2e
 ### Lints and fixes files
 ```
 npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
