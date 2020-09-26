@@ -1,9 +1,9 @@
 <template>
-<b-container fluid>
-  <Header/>
-  <Home/>
-  <Footer/>
-</b-container>
+  <div>
+    <Header/>
+    <Home/>
+    <Footer/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -26,3 +26,10 @@ export default Vue.extend({
   })
 });
 </script>
+
+<style>
+  .width-limiter{
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+</style>
