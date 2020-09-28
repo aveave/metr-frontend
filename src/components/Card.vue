@@ -22,11 +22,11 @@
 
                 <b-row align-v="center">
                     <b-col>
-                        <b-button class="card-basket-btn btn-color">В корзину</b-button>
+                        <button class="card-basket-btn">В корзину</button>
                     </b-col>
                     <b-col offset-md="1">
 
-                        <select class="card-count-btn btn-color">
+                        <select class="card-count-btn">
                             <option selected>1</option>
                             <option value="1">Green</option>
                             <option value="2">Blue</option>

@@ -7,7 +7,9 @@
                         <img src="../assets/header/logo.svg">
                     </b-col>
                     <b-col>
-                        <b-button class="btn-color">Каталог</b-button>
+                        <b-button v-b-modal.modal-catalog>
+                            Каталог
+                        </b-button>
                     </b-col>
                 </b-row>
             </b-col>
@@ -16,7 +18,7 @@
                 <b-input-group class="header-search-panel">
                     <b-form-input size="sm" placeholder="Я хотел бы найти...."></b-form-input>
                     <b-input-group-append>
-                        <b-button size="sm" class="mb-2 btn-color">
+                        <b-button size="sm" class="mb-2">
                             <b-icon icon="search"></b-icon>
                         </b-button>
                     </b-input-group-append>
@@ -32,7 +34,7 @@
                         </b-col>
                     </button>
 
-                    <button>
+                    <button v-b-modal.modal-login>
                         <b-col>
                             <img src="../assets/header/user.svg">
                             <div>Мой Мэтр</div>
@@ -53,7 +55,6 @@
                         </b-col>
                     </button>
                 </b-row>
-
             </b-col>
         </b-row>
         <b-row>
@@ -94,16 +95,26 @@
                 <div class="bold-text">+7(473) 246-07-07</div>
             </b-col>
         </b-row>
+        <Login />
+        <Catalog />
     </header>
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
+    import {Component, Vue} from "vue-property-decorator";
+    import Login from "./Login.vue";
+    import Catalog from "./Catalog.vue";
 
-    export default Vue.extend({
+    @Component({
         name: "Header",
-        data: () => ({})
-    });
+        components: {
+            Login,
+            Catalog
+        }
+    })
+    export default class Header extends Vue {
+
+    };
 </script>
 
 <style>
@@ -117,35 +128,15 @@
         height: 16px;
     }
 
-    .btn-color {
-        background-color: #EF9A41;
-        border-radius: 5px;
-        color: white;
-        border-color: #EF9A41;
-    }
-
     .header-right-panel button {
         background-color: white;
         border: none;
+        color: #000;
     }
 
     .header-search-panel input,
     .header-search-panel button {
         border-color: #EF9A41;
-    }
-
-    input,
-    button,
-    select,
-    textarea,
-    a {
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 16px;
-        letter-spacing: 0.03em;
-        color: #231F20;
     }
 
 

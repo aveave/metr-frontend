@@ -26,3 +26,7 @@ export default Vue.extend({
   })
 });
 </script>
+
+<style>
+  @import './assets/styles/main.css';
+</style>
