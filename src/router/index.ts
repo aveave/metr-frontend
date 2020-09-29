@@ -1,9 +1,27 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
+import Home from '../views/Home.vue';
+import CatalogPage from '../views/CatalogPage.vue';
+import NotFoundPage from '../views/NotFoundPage.vue';
+
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  {
+    path: '/catalog/:sectionID',
+    // name: 'CatalogPage',
+    component: CatalogPage
+  },
+  {
+    path: '/',
+    component: Home
+  },
+  {
+    path: '*',
+    component: NotFoundPage
+  }
+
   // {
   //   path: "/",
   //   name: "Home",
@@ -21,7 +39,8 @@ const routes: Array<RouteConfig> = [
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 });
 
 export default router;
