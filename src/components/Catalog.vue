@@ -14,25 +14,25 @@
     >
       <b-tab
         active
-        v-for="product in mainProducts"
-        :key="product.id"
-        :title="product.name"
+        v-for="catalogItem in mainCatalogItems"
+        :key="catalogItem.id"
+        :title="catalogItem.name"
       >
         <b-row>
           <b-col
             cols="4"
-            v-for="subProduct in relatedProducts.get(product.id)"
-            :key="subProduct.id"
+            v-for="subCatalogItem in relatedCatalogItems.get(catalogItem.id)"
+            :key="subCatalogItem.id"
           >
-            <p style="font-weight: bold;">{{ subProduct.name }}</p>
+            <p style="font-weight: bold;">{{ subCatalogItem.name }}</p>
             <div class="card-text">
               <p
-                v-for="(subProductThirdLevel, index) in relatedNames(
-                  subProduct
+                v-for="(subCatalogItemThirdLevel, index) in relatedNames(
+                    subCatalogItem
                 )"
                 :key="index"
               >
-                {{ subProductThirdLevel }}
+                {{ subCatalogItemThirdLevel }}
               </p>
             </div>
           </b-col>
@@ -45,45 +45,46 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import products from "@/store/modules/catalog-new/products";
-import { Product } from "@/store/models";
+import catalog from "@/store/modules/catalog/catalog-items";
+import { CatalogItem } from "@/store/models";
 
 @Component({
   name: "Catalog"
 })
 export default class Catalog extends Vue {
-  productCatalog: Product[] = [];
-  mainProducts: Product[] = [];
+ 
+  catalogItem: CatalogItem[] = [];
+  mainCatalogItems: CatalogItem[] = [];
 
-  relatedProducts = new Map();
-  relatedSubProducts = new Map();
+  relatedCatalogItems = new Map();
+  relatedCatalogSubItems = new Map();
 
   created() {
-    products.uploadProducts().then(() => {
-      this.productCatalog = products.productsFromCatalog;
-      this.mainProducts = this.productCatalog.filter(p => p.parent_id == null);
+    catalog.uploadCatalogItems().then(() => {
+      this.catalogItem = catalog.itemsFromCatalog;
+      this.mainCatalogItems = this.catalogItem.filter(p => p.parent_id == null);
 
-      this.mainProducts.forEach(mainProduct => {
-        const subProducts: Product[] = this.productCatalog.filter(
-          subProduct => mainProduct.id == subProduct.parent_id
+      this.mainCatalogItems.forEach(mainCatalogItem => {
+        const subCatalogItems: CatalogItem[] = this.catalogItem.filter(
+            subCatalogItem => mainCatalogItem.id == subCatalogItem.parent_id
         );
-        this.relatedProducts.set(mainProduct.id, subProducts);
+        this.relatedCatalogItems.set(mainCatalogItem.id, subCatalogItems);
 
-        subProducts.forEach(subProduct => {
-          const subProductsThirdLevel: Product[] = this.productCatalog.filter(
-            subProductThirdLevel =>
-              subProduct.id == subProductThirdLevel.parent_id
+        subCatalogItems.forEach(subCatalogItem => {
+          const subCatalogItemsThirdLevel: CatalogItem[] = this.catalogItem.filter(
+            subCatalogItemThirdLevel =>
+            subCatalogItem.id == subCatalogItemThirdLevel.parent_id
           );
-          this.relatedSubProducts.set(subProduct.id, subProductsThirdLevel);
+          this.relatedCatalogSubItems.set(subCatalogItem.id, subCatalogItemsThirdLevel);
         });
       });
     });
   }
 
-  relatedNames(subProduct: Product): string[] {
-    return this.relatedSubProducts
-      .get(subProduct.id)
-      .map((product: Product) => product.name);
+  relatedNames(subCatalogItem: CatalogItem): string[] {
+    return this.relatedCatalogSubItems
+      .get(subCatalogItem.id)
+      .map((item: CatalogItem) => item.name);
   }
 }
 </script>

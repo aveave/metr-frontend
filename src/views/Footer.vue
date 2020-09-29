@@ -56,13 +56,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import {Component, Vue} from "vue-property-decorator";
 
-export default Vue.extend({
-  name: "Footer",
+@Component
+export default class Footer extends Vue {
 
-  data: () => ({})
-});
+};
 </script>
 
 <style>

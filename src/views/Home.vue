@@ -56,19 +56,21 @@
   </div>
 </template>
 
-<script>
-    import Vue from "vue";
+<script lang="ts">
+    import {Component, Vue} from "vue-property-decorator";
 
     import Card from "@/components/Card.vue";
     import Carousel from "@/components/Carousel.vue";
 
-    export default Vue.extend({
-        name: "Home",
+    @Component({
         components: {
             Card,
             Carousel
         }
-});
+    })
+    export default class Home extends Vue{
+
+};
 </script>
 
 <style>

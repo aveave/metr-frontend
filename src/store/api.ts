@@ -6,6 +6,6 @@ export const shopApi = axios.create({
 });
 
 export async function getCatalogItems() {
-  const response = await shopApi.get("/products");
+  const response = await shopApi.get("/catalogItems");
   return response.data;
 }
