@@ -138,7 +138,7 @@
 
     .header-catalog-button {
         padding: 5px 16px;
-    }   
+    }
 
 
     .header-burger-icon {
@@ -198,6 +198,7 @@
         border: none;
         border-radius: 5px;
         transition: background 0.2s ease;
+        color: black;
     }
 
     .header-menu-button:hover {

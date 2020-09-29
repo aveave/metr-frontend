@@ -1,15 +1,19 @@
 <template>
-    <b-modal id="modal-catalog" lazy hide-header hide-footer hide-backdrop content-class="shadow">
-
-        <b-tabs pills card vertical>
-
+    <b-modal id="modal-catalog" hide-header hide-footer hide-backdrop content-class="shadow modal-catalog-content">
+        <b-tabs pills vertical nav-wrapper-class="w-30" active-nav-item-class="active-tab">
             <b-tab active v-for="product in mainProducts" :key="product.id" :title="product.name">
-                <!-- <b-card-text v-for="">
-                    {{relatedProducts.get(product.id)}}
-                </b-card-text> -->
+                <b-row>
+                    <b-col cols="4" v-for="subProduct in relatedProducts.get(product.id)" :key="subProduct.id">
+                        <p style="font-weight: bold;">{{subProduct.name}}</p>
+                        <div class="card-text">
+                            <p v-for="(subProductThirdLevel, index) in relatedNames(subProduct)" :key="index">
+                                {{subProductThirdLevel}}
+                            </p>
+                        </div>
+                    </b-col>
+                </b-row>
             </b-tab>
         </b-tabs>
-
     </b-modal>
 </template>
 
@@ -28,6 +32,7 @@
         mainProducts: Product[] = [];
 
         relatedProducts = new Map();
+        relatedSubProducts = new Map();
 
         created() {
             products.uploadProducts().then(() => {
@@ -39,24 +44,40 @@
                     mainProduct => {
                         const subProducts: Product[] = this.productCatalog.filter(subProduct => mainProduct.id == subProduct.parent_id);
                         this.relatedProducts.set(mainProduct.id, subProducts);
+
+                        subProducts.forEach(
+                            subProduct => {
+                                const subProductsThirdLevel: Product[] = this.productCatalog.filter(subProductThirdLevel => subProduct.id == subProductThirdLevel.parent_id);
+                                this.relatedSubProducts.set(subProduct.id, subProductsThirdLevel);
+                            }
+                        )
                     }
                 )
             })
         }
 
-        // relatedProducts(parentId: string): Product[] {
-
-        //     let relatedProducts = new Map();
-        //     this.mainProducts.forEach(
-        //         mainProduct => {
-        //             let subProducts: Product[] = this.productCatalog.filter(subProduct => mainProduct.id == subProduct.parent_id);
-        //             relatedProducts.set(mainProduct.id, subProducts);
-        //         }
-        //     )
-        // }
+        relatedNames(subProduct: Product): string[] {
+            return this.relatedSubProducts.get(subProduct.id).map((product: Product) => product.name);
+        }
     }
 </script>
 
 <style>
+    .modal-catalog-content {
+        width: 1000px;
+        margin-top: 70px;
+    }
 
+    .modal-catalog-content a:hover {
+        color: #EF9A41;
+    }
+
+    .active-tab {
+        color: #EF9A41 !important;
+        background-color: white !important;
+    }
+
+    .card-text {
+        line-height: 1;
+    }
 </style>
