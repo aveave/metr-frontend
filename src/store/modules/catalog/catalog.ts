@@ -1,31 +1,26 @@
-import Vue from "vue";
 import Item from "./Item";
 
-
 const state: any = {
-    items: Array<Item>()
-}
+  items: Array<Item>()
+};
 
-
-const getters: any = {
-
-}
+const getters: any = {};
 
 const mutations: any = {
-    addItem(state: any, item: Item) {
-        state.items.push(item);
-    }
-}
+  addItem(state: any, item: Item) {
+    state.items.push(item);
+  }
+};
 
 const actions: any = {
-    addItem(context: any, item: Item) {
-        context.commit('addItem', item);
-    }
-}
+  addItem(context: any, item: Item) {
+    context.commit("addItem", item);
+  }
+};
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    mutations
-}
+  namespaced: true,
+  state,
+  getters,
+  mutations
+};

@@ -7,7 +7,7 @@ const routes: Array<RouteConfig> = [
   // {
   //   path: "/",
   //   name: "Home",
-  //   component: 
+  //   component:
   // },
   // {
   //   path: "/about",

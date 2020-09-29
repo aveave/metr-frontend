@@ -59,8 +59,8 @@
 <script>
     import Vue from "vue";
 
-    import Card from "../components/Card.vue";
-    import Carousel from "../components/Carousel.vue";
+    import Card from "@/components/Card.vue";
+    import Carousel from "@/components/Carousel.vue";
 
     export default Vue.extend({
         name: "Home",
