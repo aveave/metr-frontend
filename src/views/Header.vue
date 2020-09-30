@@ -1,108 +1,106 @@
 <template>
-  <div class="width-limiter">
-    <header class="header-container">
-      <b-container fluid>
-        <b-row class="header-top-line">
-          <b-col cols="3">
-            <b-row align-h="center">
-              <b-col>
-                <img src="../assets/header/logo.svg" />
-              </b-col>
-              <b-col>
-                <button class="header-catalog-button" v-b-modal.modal-catalog>
-                  <img
-                    class="header-burger-icon"
-                    src="../assets/header/catalog_burger.svg"
-                  />
-                  <span class="header-burger-text">Каталог</span>
-                </button>
-              </b-col>
-            </b-row>
-          </b-col>
+  <header class="header-container width-limiter">
+    <b-container fluid>
+      <b-row class="header-top-line">
+        <b-col cols="3">
+          <b-row align-h="center">
+            <b-col>
+              <img src="../assets/header/logo.svg" />
+            </b-col>
+            <b-col>
+              <button class="header-catalog-button" v-b-modal.modal-catalog>
+                <img
+                  class="header-burger-icon"
+                  src="../assets/header/catalog_burger.svg"
+                />
+                <span class="header-burger-text">Каталог</span>
+              </button>
+            </b-col>
+          </b-row>
+        </b-col>
 
-          <b-col cols="6">
-            <b-input-group class="header-search-panel">
-              <b-form-input
-                class="header-search-input"
-                size="sm"
-                placeholder="Я хотел бы найти...."
-              >
-              </b-form-input>
-              <b-input-group-append>
-                <b-button size="sm" class="btn-color header-search-button">
-                  <b-icon class="header-search-icon" icon="search"></b-icon>
-                </b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-col>
+        <b-col cols="6">
+          <b-input-group class="header-search-panel">
+            <b-form-input
+              class="header-search-input"
+              size="sm"
+              placeholder="Я хотел бы найти...."
+            >
+            </b-form-input>
+            <b-input-group-append>
+              <b-button size="sm" class="btn-color header-search-button">
+                <b-icon class="header-search-icon" icon="search"></b-icon>
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-col>
 
-          <b-col cols="3">
-            <button class="header-menu-button">
-              <img src="../assets/header/heart.svg" />
-              <div>Избранное</div>
-            </button>
+        <b-col cols="3">
+          <button class="header-menu-button">
+            <img src="../assets/header/heart.svg" />
+            <div>Избранное</div>
+          </button>
 
-            <button class="header-menu-button" v-b-modal.modal-login>
-              <img src="../assets/header/user.svg" />
-              <div>Мой Мэтр</div>
-            </button>
+          <button class="header-menu-button" v-b-modal.modal-login>
+            <img src="../assets/header/user.svg" />
+            <div>Мой Мэтр</div>
+          </button>
 
-            <button class="header-menu-button">
-              <img src="../assets/header/group.svg" />
-              <div>Заказы</div>
-            </button>
+          <button class="header-menu-button">
+            <img src="../assets/header/group.svg" />
+            <div>Заказы</div>
+          </button>
 
-            <button class="header-menu-button">
-              <img src="../assets/header/supermarket.svg" />
-              <div>Корзина</div>
-            </button>
-          </b-col>
-        </b-row>
-        <b-row class="header-bottom-line">
-          <b-col cols="10">
-            <b-row>
-              <ul class="nav">
-                <li>
-                  <a class="nav-link active" href="#">Бренды</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Акции</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Новости</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Доставка и оплата</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">О компании</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Отзывы</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Поступления</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Заказ по прайсу</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">Контакты</a>
-                </li>
-              </ul>
-            </b-row>
-          </b-col>
-          <b-col cols="2">
-            <div class="header-phone-wrapper">
-              <a class="bold-text" href="tel:+74732460707">+7(473) 246-07-07</a>
-            </div>
-          </b-col>
-        </b-row>
-        <Login />
-        <Catalog />
-      </b-container>
-    </header>
-  </div>
+          <button class="header-menu-button" @click="openCart()">
+            <img src="../assets/header/supermarket.svg" />
+            <div>Корзина</div>
+          </button>
+        </b-col>
+      </b-row>
+      <b-row class="header-bottom-line">
+        <b-col cols="10">
+          <b-row>
+            <ul class="nav">
+              <li>
+                <a class="nav-link active" href="#">Бренды</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Акции</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Новости</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Доставка и оплата</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">О компании</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Отзывы</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Поступления</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Заказ по прайсу</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Контакты</a>
+              </li>
+            </ul>
+          </b-row>
+        </b-col>
+        <b-col cols="2">
+          <div class="header-phone-wrapper">
+            <a class="bold-text" href="tel:+74732460707">+7(473) 246-07-07</a>
+          </div>
+        </b-col>
+      </b-row>
+      <Login />
+      <Catalog />
+    </b-container>
+  </header>
 </template>
 
 <script lang="ts">
@@ -117,7 +115,11 @@ import Catalog from "@/components/Catalog.vue";
     Catalog
   }
 })
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  openCart() {
+    this.$router.push({ name: "cart" });
+  }
+}
 </script>
 
 <style>

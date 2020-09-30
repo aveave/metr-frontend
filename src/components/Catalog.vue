@@ -28,7 +28,7 @@
             <div class="card-text">
               <p
                 v-for="(subCatalogItemThirdLevel, index) in relatedNames(
-                    subCatalogItem
+                  subCatalogItem
                 )"
                 :key="index"
               >
@@ -52,7 +52,6 @@ import { CatalogItem } from "@/store/models";
   name: "Catalog"
 })
 export default class Catalog extends Vue {
- 
   catalogItem: CatalogItem[] = [];
   mainCatalogItems: CatalogItem[] = [];
 
@@ -66,16 +65,19 @@ export default class Catalog extends Vue {
 
       this.mainCatalogItems.forEach(mainCatalogItem => {
         const subCatalogItems: CatalogItem[] = this.catalogItem.filter(
-            subCatalogItem => mainCatalogItem.id == subCatalogItem.parent_id
+          subCatalogItem => mainCatalogItem.id == subCatalogItem.parent_id
         );
         this.relatedCatalogItems.set(mainCatalogItem.id, subCatalogItems);
 
         subCatalogItems.forEach(subCatalogItem => {
           const subCatalogItemsThirdLevel: CatalogItem[] = this.catalogItem.filter(
             subCatalogItemThirdLevel =>
-            subCatalogItem.id == subCatalogItemThirdLevel.parent_id
+              subCatalogItem.id == subCatalogItemThirdLevel.parent_id
           );
-          this.relatedCatalogSubItems.set(subCatalogItem.id, subCatalogItemsThirdLevel);
+          this.relatedCatalogSubItems.set(
+            subCatalogItem.id,
+            subCatalogItemsThirdLevel
+          );
         });
       });
     });

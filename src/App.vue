@@ -1,13 +1,12 @@
 <template>
   <div>
     <Header />
-  <router-view></router-view>
+    <router-view></router-view>
     <Footer />
   </div>
 </template>
 
 <script lang="ts">
-
 import Vue from "vue";
 import Header from "./views/Header.vue";
 import Footer from "./views/Footer.vue";
@@ -17,11 +16,10 @@ export default Vue.extend({
 
   components: {
     Header,
-    Footer,
+    Footer
   },
 
   data: () => ({})
-
 });
 </script>
 
