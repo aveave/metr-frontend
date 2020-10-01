@@ -26,8 +26,8 @@
             <b-col cols="10">
               <b-container>
                 <b-row>
-                  <b-col cols="2">
-                    <Card />
+                  <b-col cols="2" v-for="product in products" v-bind:key="product.id">
+                    <Card :product=product />
                   </b-col>
                 </b-row>
               </b-container>
@@ -40,46 +40,53 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Card from "../components/Card.vue";
 
-export default Vue.extend({
-  name: "CatalogPage",
+import { Component, Vue } from "vue-property-decorator";
+
+import Card from "../components/Card.vue";
+import products from "../store/modules/products/products";
+
+@Component({
   components: {
     Card
-  },
+  }
+})
 
-  computed: {
-    categoryName: function() {
-      const category = this.$store.state.products.productsFromCatalog.filter(
+export default class CatalogPage extends Vue {
+
+  breadcrumbsItems = [
+    {
+      text: "Каталог",
+      href: "/catalog"
+    }
+  ]
+
+  created() {
+    const sectionID = this.$route.params.sectionID;
+    products.uploadProducts(613, 1)
+  }
+
+  get categoryName() {
+      const category = this.$store.state.catalogItems.itemsFromCatalog.filter(
         (category: any) => category.id == "612"
       );
       if (category.length > 0) {
         return category[0]["name"];
       }
       return "";
-    },
+  }
 
-    subcategories: function() {
-      return this.$store.state.products.productsFromCatalog.filter(
+  get subcategories() {
+   return this.$store.state.catalogItems.itemsFromCatalog.filter(
         (category: any) => category.parent_id == "612"
       );
-    }
-  },
-
-  data() {
-    return {
-      sectionID: this.$route.params.sectionID,
-
-      breadcrumbsItems: [
-        {
-          text: "Каталог",
-          href: "/catalog"
-        }
-      ]
-    };
   }
-});
+
+  get products() {
+    return this.$store.state.products.products.data;
+  }
+
+}
 </script>
 
 <style lang="css" scoped>
