@@ -5,7 +5,7 @@
         <b-col cols="3">
           <b-row align-h="center">
             <b-col>
-              <img src="../assets/header/logo.svg" />
+              <img src="../assets/header/logo.svg" @click="openHomePage"/>
             </b-col>
             <b-col>
               <button class="header-catalog-button" v-b-modal.modal-catalog>
@@ -51,7 +51,7 @@
             <div>Заказы</div>
           </button>
 
-          <button class="header-menu-button" @click="openCart()">
+          <button class="header-menu-button" @click="openCart">
             <img src="../assets/header/supermarket.svg" />
             <div>Корзина</div>
           </button>
@@ -118,6 +118,10 @@ import Catalog from "@/components/Catalog.vue";
 export default class Header extends Vue {
   openCart() {
     this.$router.push({ name: "cart" });
+  }
+
+  openHomePage() {
+    this.$router.push({ name: "home" });
   }
 }
 </script>

@@ -24,7 +24,6 @@ export default Vue.extend({
 </script>
 
 <style>
-@import "./assets/styles/main.css";
 
 .width-limiter {
   max-width: 1440px;

@@ -2,34 +2,8 @@
   <div class="width-limiter">
     <b-container fluid>
       <Carousel />
-
-      <b-row class="start-page-block">
-        <b-col>
-          <b-row>
-            <h2>Популярное</h2>
-          </b-row>
-          <b-row>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </b-row>
-        </b-col>
-      </b-row>
-
-      <b-row class="start-page-block">
-        <b-col>
-          <b-row>
-            <h2>Новинки</h2>
-          </b-row>
-          <b-row>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </b-row>
-        </b-col>
-      </b-row>
+      <SuggestedList :header="'Популярное'" :suggestedList="suggestedList" />
+      <SuggestedList :header="'Новинки'" :suggestedList="suggestedList" />
 
       <b-row class="start-page-block" align-h="end">
         <b-col>
@@ -64,14 +38,27 @@ import { Component, Vue } from "vue-property-decorator";
 
 import Card from "@/components/Card.vue";
 import Carousel from "@/components/Carousel.vue";
+import SuggestedList from "@/components/SuggestedList.vue";
+
+import specialOffer from "@/store/modules/offer/special-offer";
 
 @Component({
   components: {
     Card,
-    Carousel
+    Carousel,
+    SuggestedList
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+
+  get suggestedList() {
+      return this.$store.state.specialOffer.suggestedProducts;
+    }
+
+  created() {
+    specialOffer.uploadSuggestedProducts();
+  }
+}
 </script>
 
 <style>

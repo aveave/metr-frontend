@@ -1,10 +1,8 @@
 import axios from "axios";
-import { SpecialOfferResponse, Product } from "./models";
+import { SpecialOfferResponse, Product, BookedItem, BookItemResponse } from "./models";
 
 export const shopApi = axios.create({
-  // baseURL: 'https://metropt.ru/api/'
-  // baseURL: "https://4d362027-7c18-4ab5-a18a-1640896f385f.mock.pstmn.io"
-  baseURL: "https://bca2af26-ab78-4af8-8b98-1807fa9f1eb8.mock.pstmn.io"
+  baseURL: "http://localhost:8081",
 });
 
 export async function getCatalogItems() {
@@ -13,9 +11,22 @@ export async function getCatalogItems() {
 }
 
 export async function getSuggestedProducts(): Promise<Product[]> {
-  console.log("inside api call");
   const response = await shopApi.get("/suggestedProducts");
-  console.log("after api call");
-  console.log(response);
   return response.data.products;
+}
+
+export async function getCartResponse() {
+  const response = await shopApi.get("/cart");
+  return response.data;
+}
+
+export async function addItemToCart(bookedItem: BookedItem) : Promise<BookItemResponse | undefined> {
+  try {
+     const response = await shopApi.post("/cart", {
+      bookedItem
+     })
+     return (response.data as BookItemResponse)
+  } catch(e) {
+    console.log(e);
+  }
 }

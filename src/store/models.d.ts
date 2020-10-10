@@ -17,3 +17,37 @@ export interface Product {
   picture: string;
   price: string;
 }
+
+export interface CartResponse {
+  error: boolean;
+  payload: CartPayload;
+}
+
+export interface CartPayload {
+  products?: (CartItemEntity)[] | null;
+  quantity: number;
+  sum: number;
+}
+
+export interface CartItemEntity {
+  name: string;
+  price: number;
+  productId: string;
+  quantity: number;
+  picture: string;
+}
+
+export interface BookedItem {
+    id: string;
+    quantity: number;
+}
+
+export interface BookItemResponse {
+  error: boolean;
+  message: string;
+  name: string;
+  price: number;
+  product_id: string;
+  quantity: number;
+  picture: string;
+}

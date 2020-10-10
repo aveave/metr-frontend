@@ -21,15 +21,11 @@ class SpecialOfferModule extends VuexModule {
   @Mutation
   setSuggestedProducts(suggestedProducts: Product[]) {
     this.suggestedProducts = suggestedProducts;
-    console.log(this.suggestedProducts);
   }
 
   @Action({ commit: "setSuggestedProducts" })
   async uploadSuggestedProducts() {
-    console.log("inside upload");
     const suggestedProducts = await api.getSuggestedProducts();
-    console.log("after upload");
-
     return suggestedProducts;
   }
 }
