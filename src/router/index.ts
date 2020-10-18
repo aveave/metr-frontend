@@ -24,6 +24,16 @@ const routes: Array<RouteConfig> = [
     component: () => import("@/views/Cart.vue")
   },
   {
+    path: "/checkout",
+    name: "checkout",
+    component: () => import("@/views/Checkout.vue")
+  },
+  {
+    path: "/personal",
+    name: "personal",
+    component: () => import("@/views/Personal.vue")
+  },
+  {
     path: "*",
     component: NotFoundPage
   }

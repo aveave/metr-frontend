@@ -26,8 +26,12 @@
             <b-col cols="10">
               <b-container>
                 <b-row>
-                  <b-col cols="2" v-for="product in products" v-bind:key="product.id">
-                    <Card :product=product />
+                  <b-col
+                    cols="2"
+                    v-for="product in products"
+                    v-bind:key="product.id"
+                  >
+                    <Card :product="product" />
                   </b-col>
                 </b-row>
               </b-container>
@@ -40,7 +44,6 @@
 </template>
 
 <script lang="ts">
-
 import { Component, Vue } from "vue-property-decorator";
 
 import Card from "../components/Card.vue";
@@ -51,41 +54,38 @@ import products from "../store/modules/products/products";
     Card
   }
 })
-
 export default class CatalogPage extends Vue {
-
   breadcrumbsItems = [
     {
       text: "Каталог",
       href: "/catalog"
     }
-  ]
+  ];
 
   created() {
-    const sectionID = this.$route.params.sectionID;
-    products.uploadProducts(613, 1)
+    // const sectionID = this.$route.params.sectionID;
+    // products.uploadProducts(613, 1)
   }
 
   get categoryName() {
-      const category = this.$store.state.catalogItems.itemsFromCatalog.filter(
-        (category: any) => category.id == "612"
-      );
-      if (category.length > 0) {
-        return category[0]["name"];
-      }
-      return "";
+    const category = this.$store.state.catalogItems.itemsFromCatalog.filter(
+      (category: any) => category.id == "612"
+    );
+    if (category.length > 0) {
+      return category[0]["name"];
+    }
+    return "";
   }
 
   get subcategories() {
-   return this.$store.state.catalogItems.itemsFromCatalog.filter(
-        (category: any) => category.parent_id == "612"
-      );
+    return this.$store.state.catalogItems.itemsFromCatalog.filter(
+      (category: any) => category.parent_id == "612"
+    );
   }
 
   get products() {
     return this.$store.state.products.products.data;
   }
-
 }
 </script>
 

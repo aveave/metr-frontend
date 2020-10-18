@@ -10,9 +10,9 @@ import * as api from "../../api";
 import store from "@/store";
 
 @Module({
-  dynamic: true,
   namespaced: true,
   name: "catalogItems",
+  dynamic: true,
   store
 })
 class CatalogItemsModule extends VuexModule {

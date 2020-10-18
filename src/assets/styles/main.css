@@ -25,3 +25,10 @@ button {
     letter-spacing: 0.03em;
 
 }
+
+input {
+    background: #FFFFFF;
+    border: 1.5px solid #DEDEDE;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

@@ -2,8 +2,8 @@
   <div class="width-limiter">
     <b-container fluid>
       <Carousel />
-      <SuggestedList :header="'Популярное'" :suggestedList="suggestedList" />
-      <SuggestedList :header="'Новинки'" :suggestedList="suggestedList" />
+      <SuggestedList header="Популярное" :suggestedList="suggestedList" />
+      <SuggestedList header="Новинки" :suggestedList="suggestedList" />
 
       <b-row class="start-page-block" align-h="end">
         <b-col>
@@ -50,10 +50,9 @@ import specialOffer from "@/store/modules/offer/special-offer";
   }
 })
 export default class Home extends Vue {
-
   get suggestedList() {
-      return this.$store.state.specialOffer.suggestedProducts;
-    }
+    return this.$store.state.specialOffer.suggestedProducts;
+  }
 
   created() {
     specialOffer.uploadSuggestedProducts();

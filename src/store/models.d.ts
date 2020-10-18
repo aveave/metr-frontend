@@ -11,7 +11,7 @@ export interface SpecialOfferResponse {
 }
 
 export interface Product {
-  available: string;
+  available: number;
   id: string;
   name: string;
   picture: string;
@@ -24,7 +24,7 @@ export interface CartResponse {
 }
 
 export interface CartPayload {
-  products?: (CartItemEntity)[] | null;
+  products?: CartItemEntity[] | null;
   quantity: number;
   sum: number;
 }
@@ -38,8 +38,8 @@ export interface CartItemEntity {
 }
 
 export interface BookedItem {
-    id: string;
-    quantity: number;
+  id: string;
+  quantity: number;
 }
 
 export interface BookItemResponse {
@@ -50,4 +50,41 @@ export interface BookItemResponse {
   product_id: string;
   quantity: number;
   picture: string;
+}
+
+export interface UserInfo {
+  email: string;
+  token: string;
+  name: string;
+  surname: string;
+  company: string;
+  country: string;
+  city: string;
+  address: string;
+  inn: string;
+}
+
+export interface UserLoginSubmit {
+  email: string;
+  password: string;
+}
+
+export interface UserRegisterSubmit {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface OrderInfo {
+  name: string;
+  surname: string;
+  phoneNumber: string;
+  mobileNumber: string;
+  address: string;
+  city: string;
+  email: string;
+  inn: string;
+  deliveryId: string;
+  paymentId: string;
+  comment: string;
 }

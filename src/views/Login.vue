@@ -17,6 +17,7 @@
             v-model="loginPassword"
             placeholder="Пароль"
             required
+            type="password"
           ></b-form-input>
         </form>
 
@@ -37,9 +38,10 @@
           </b-col>
         </b-row>
         <b-row>
-          <button class="login-btn">Войти</button>
+          <button class="login-btn" @click="loginUser">Войти</button>
         </b-row>
       </b-tab>
+
       <b-tab title="Зарегистрироваться">
         <form ref="form" @submit.stop.prevent="handleSubmit">
           <b-form-input
@@ -64,11 +66,12 @@
             v-model="registerPassword"
             placeholder="Пароль"
             required
+            type="password"
           >
           </b-form-input>
         </form>
         <b-row>
-          <button class="login-btn">Создать аккаунт</button>
+          <button class="login-btn" @click="register">Создать аккаунт</button>
         </b-row>
       </b-tab>
     </b-tabs>
@@ -77,6 +80,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import user from "@/store/modules/user/user";
 
 @Component
 export default class Login extends Vue {
@@ -88,6 +92,27 @@ export default class Login extends Vue {
   loginPassword = "";
 
   loginStatus = false;
+
+  async loginUser() {
+    await user.login({
+      email: this.loginIdentifier,
+      password: this.loginPassword
+    });
+    if (this.$store.state.user.userInfo.name) {
+      this.$root.$emit("bv::hide::modal", "modal-login");
+    }
+  }
+
+  async register() {
+    await user.register({
+      name: this.registerName,
+      email: this.registerEmail,
+      password: this.registerPassword
+    });
+    if (this.$store.state.user.userInfo.name) {
+      this.$root.$emit("bv::hide::modal", "modal-login");
+    }
+  }
 }
 </script>
 

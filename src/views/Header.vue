@@ -5,7 +5,7 @@
         <b-col cols="3">
           <b-row align-h="center">
             <b-col>
-              <img src="../assets/header/logo.svg" @click="openHomePage"/>
+              <img src="../assets/header/logo.svg" @click="openHomePage" />
             </b-col>
             <b-col>
               <button class="header-catalog-button" v-b-modal.modal-catalog>
@@ -36,12 +36,12 @@
         </b-col>
 
         <b-col cols="3">
-          <button class="header-menu-button">
+          <button class="header-menu-button" @click="openProfile">
             <img src="../assets/header/heart.svg" />
             <div>Избранное</div>
           </button>
 
-          <button class="header-menu-button" v-b-modal.modal-login>
+          <button class="header-menu-button" @click="openProfile">
             <img src="../assets/header/user.svg" />
             <div>Мой Мэтр</div>
           </button>
@@ -65,28 +65,36 @@
                 <a class="nav-link active" href="#">Бренды</a>
               </li>
               <li>
-                <a class="nav-link" href="#">Акции</a>
+                <router-link class="nav-link" to="">Акции</router-link>
               </li>
               <li>
-                <a class="nav-link" href="#">Новости</a>
+                <router-link class="nav-link" to="">Новости</router-link>
               </li>
               <li>
-                <a class="nav-link" href="#">Доставка и оплата</a>
+                <router-link class="nav-link" to=""
+                  >Доставка и оплата</router-link
+                >
               </li>
               <li>
-                <a class="nav-link" href="#">О компании</a>
+                <router-link class="nav-link" to="About"
+                  >О компании</router-link
+                >
               </li>
               <li>
-                <a class="nav-link" href="#">Отзывы</a>
+                <router-link class="nav-link" to="">Отзывы</router-link>
               </li>
               <li>
-                <a class="nav-link" href="#">Поступления</a>
+                <router-link class="nav-link" to="">Поступления</router-link>
               </li>
               <li>
-                <a class="nav-link" href="#">Заказ по прайсу</a>
+                <router-link class="nav-link" to=""
+                  >Заказ по прайсу</router-link
+                >
               </li>
               <li>
-                <a class="nav-link" href="#">Контакты</a>
+                <router-link class="nav-link" to="contacts"
+                  >Контакты</router-link
+                >
               </li>
             </ul>
           </b-row>
@@ -116,12 +124,25 @@ import Catalog from "@/components/Catalog.vue";
   }
 })
 export default class Header extends Vue {
+
+  get user() {
+    return this.$store.state.user.userInfo;
+  }
+
   openCart() {
     this.$router.push({ name: "cart" });
   }
 
   openHomePage() {
     this.$router.push({ name: "home" });
+  }
+
+  openProfile() {
+    if(this.user) {
+      this.$router.push({ name: "personal"});
+    } else {
+      this.$root.$emit("bv::show::modal", "modal-login");
+    }
   }
 }
 </script>
