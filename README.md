@@ -1,6 +1,19 @@
 # Frontend app for Online shop Metr
 
-Application contains 2 pages: Authors and Books
+Application contains following pages: 
+
+	- Home page
+	- Login modal window
+	- Catalog modal window
+	- Orders page
+	- Cart page
+	- Personal page
+	- Catalog page
+
+Used decorator libs
+ - vue-property-decorator
+ - vuex-module-decorators
+
 
 ## Project setup
 ```

@@ -3,7 +3,6 @@ import VueRouter, { RouteConfig } from "vue-router";
 
 import Home from "@/views/Home.vue";
 import CatalogView from "@/views/CatalogView.vue";
-import NotFoundPage from "@/views/NotFoundPage.vue";
 
 Vue.use(VueRouter);
 
@@ -37,10 +36,6 @@ const routes: Array<RouteConfig> = [
     path: "/orderlist",
     name: "orderlist",
     component: () => import("@/views/OrderList.vue")
-  },
-  {
-    path: "*",
-    component: NotFoundPage
   }
 ];
 
