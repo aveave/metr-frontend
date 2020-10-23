@@ -24,7 +24,12 @@
             v-for="subCatalogItem in relatedCatalogItems.get(catalogItem.id)"
             :key="subCatalogItem.id"
           >
-            <p style="font-weight: bold;">{{ subCatalogItem.name }}</p>
+            <a
+              href="#"
+              class="subCatalog"
+              @click="openCatalogView(subCatalogItem.id)"
+              >{{ subCatalogItem.name }}</a
+            >
             <div class="card-text">
               <p
                 v-for="(subCatalogItemThirdLevel, index) in relatedNames(
@@ -88,6 +93,16 @@ export default class Catalog extends Vue {
       .get(subCatalogItem.id)
       .map((item: CatalogItem) => item.name);
   }
+
+  openCatalogView(sectionId: string) {
+    this.$root.$emit("bv::hide::modal", "modal-catalog");
+    const catalogGroupInfo = this.relatedCatalogSubItems.get(sectionId);
+    const groupInfo = catalogGroupInfo.map(({ id, name }) => ({ id, name }));
+    this.$router.push({
+      name: "catalogview",
+      params: { sectionId, groupInfo }
+    });
+  }
 }
 </script>
 
@@ -104,6 +119,10 @@ export default class Catalog extends Vue {
 .active-tab {
   color: #ef9a41 !important;
   background-color: white !important;
+}
+
+.subCatalog {
+  font-weight: bold;
 }
 
 .card-text {

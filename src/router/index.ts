@@ -2,16 +2,16 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
 import Home from "@/views/Home.vue";
-import CatalogPage from "@/views/CatalogPage.vue";
+import CatalogView from "@/views/CatalogView.vue";
 import NotFoundPage from "@/views/NotFoundPage.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/catalog/:sectionID",
-    // name: 'CatalogPage',
-    component: CatalogPage
+    path: "/catalog",
+    name: "catalogview",
+    component: CatalogView
   },
   {
     path: "/",
@@ -32,6 +32,11 @@ const routes: Array<RouteConfig> = [
     path: "/personal",
     name: "personal",
     component: () => import("@/views/Personal.vue")
+  },
+  {
+    path: "/orderlist",
+    name: "orderlist",
+    component: () => import("@/views/OrderList.vue")
   },
   {
     path: "*",

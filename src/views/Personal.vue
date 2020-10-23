@@ -1,9 +1,9 @@
 <template>
-  <div class="width-limiter">
+  <div class="width-limiter height-limiter">
     <b-container fluid>
       <h2>Личный кабинет</h2>
       <b-row>
-        <b-col cols="3" class="personal-redirect">
+        <b-col cols="3">
           <ul>
             <li>
               <router-link to="checkout">Профиль</router-link>
@@ -141,9 +141,6 @@ export default class Personal extends Vue {
 </script>
 
 <style>
-.personal-redirect ul {
-  list-style-type: none;
-}
 
 .personal-info div {
   margin: 10px 0px;

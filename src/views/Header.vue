@@ -46,7 +46,7 @@
             <div>Мой Мэтр</div>
           </button>
 
-          <button class="header-menu-button">
+          <button class="header-menu-button" @click="openOrders">
             <img src="../assets/header/group.svg" />
             <div>Заказы</div>
           </button>
@@ -124,7 +124,6 @@ import Catalog from "@/components/Catalog.vue";
   }
 })
 export default class Header extends Vue {
-
   get user() {
     return this.$store.state.user.userInfo;
   }
@@ -137,9 +136,13 @@ export default class Header extends Vue {
     this.$router.push({ name: "home" });
   }
 
+  openOrders() {
+    this.$router.push({ name: "orderlist" });
+  }
+
   openProfile() {
-    if(this.user) {
-      this.$router.push({ name: "personal"});
+    if (this.user) {
+      this.$router.push({ name: "personal" });
     } else {
       this.$root.$emit("bv::show::modal", "modal-login");
     }
@@ -149,6 +152,7 @@ export default class Header extends Vue {
 
 <style>
 .header-container {
+  height: 130px;
   padding-top: 28px;
   padding-left: 40px;
   padding-right: 40px;

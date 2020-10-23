@@ -1,5 +1,5 @@
 <template>
-  <div class="width-limiter">
+  <div class="width-limiter height-limiter">
     <b-container class="checkout-form" fluid>
       <h2>Оформление заказа</h2>
       <b-row>

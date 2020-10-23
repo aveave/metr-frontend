@@ -27,4 +27,8 @@ export default Vue.extend({
   max-width: 1440px;
   margin: 0 auto;
 }
+
+.height-limiter {
+  min-height: calc(100vh - 314px);
+}
 </style>

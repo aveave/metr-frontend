@@ -5,17 +5,11 @@
     </b-row>
 
     <b-row align-h="center">
-      <!-- <img :src="product.picture" style="width: 160px;" /> -->
-      <img src="../assets/header/image.svg" />
+      <img :src="product.picture" style="width: 111px;" />
     </b-row>
 
     <b-row h-50>
       <b-col>
-        <!-- <h4 class="card-title">Бумага SVETOCOPY</h4>
-
-            <h6 class="card-subtitle mb-2 text-muted">Наличие: 582</h6>
-
-            <h5 class="price metr-text mt-4">$125</h5> -->
         <h5 class="card-title" style="height: 40px; font-size: 14px;">
           {{ product.name }}
         </h5>
@@ -35,7 +29,7 @@
       <b-col>
         <select v-model="quantity" class="card-count-btn">
           <option
-            v-for="n in product.available"
+            v-for="n in parseInt(product.available)"
             :key="n + '-' + product.id"
             :value="n"
             >{{ n }}</option
@@ -48,7 +42,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { Product } from "../store/models";
+import { Product } from "@/store/models";
 import cart from "@/store/modules/cart/cart";
 
 @Component

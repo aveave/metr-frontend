@@ -1,5 +1,5 @@
 <template>
-  <div class="width-limiter">
+  <div class="width-limiter height-limiter">
     <b-container fluid class="cart-view">
       <h2>Корзина</h2>
       <b-row class="cart" align-h="around">
@@ -65,7 +65,7 @@ import cart from "@/store/modules/cart/cart";
 })
 export default class Cart extends Vue {
   get allSelected() {
-    return this.$store.state.cart.allSelected;
+    return cart.allSelected;
   }
 
   get cartItemids() {
@@ -95,6 +95,10 @@ export default class Cart extends Vue {
 
   selectAll() {
     cart.selectAll();
+  }
+
+  toggleOne(index: number) {
+    cart.toggleOneItem(index);
   }
 
   checkout() {

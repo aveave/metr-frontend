@@ -16,6 +16,7 @@ export interface Product {
   name: string;
   picture: string;
   price: string;
+  sectionId?: string;
 }
 
 export interface CartResponse {
@@ -87,4 +88,24 @@ export interface OrderInfo {
   deliveryId: string;
   paymentId: string;
   comment: string;
+}
+
+export interface OrderEntity {
+  date: string;
+  id: string;
+  pictures: [];
+  sum: string;
+}
+
+export interface OrderItem {
+  name: string;
+}
+
+export interface GroupedItem {
+  id: string;
+  name: string;
+  available: string;
+  picture: string;
+  price: string;
+  category_id: string;
 }

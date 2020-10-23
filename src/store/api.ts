@@ -6,7 +6,9 @@ import {
   UserLoginSubmit,
   UserRegisterSubmit,
   UserInfo,
-  OrderInfo
+  OrderInfo,
+  OrderEntity,
+  GroupedItem
 } from "./models";
 
 export const shopApi = axios.create({
@@ -89,4 +91,14 @@ export async function addOrder(order: OrderInfo): Promise<number> {
     order
   });
   return orderResponse.data;
+}
+
+export async function getOrders(): Promise<OrderEntity[]> {
+  const orderListResponse = await shopApi.get("/orders");
+  return orderListResponse.data;
+}
+
+export async function getGroupedItems(sectionId: string): Promise<GroupedItem> {
+  const groupedItemsResponse = await shopApi.get("/products/" + sectionId);
+  return groupedItemsResponse.data;
 }

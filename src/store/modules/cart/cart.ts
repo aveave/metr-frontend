@@ -26,38 +26,42 @@ class CartModule extends VuexModule {
   sum = 0;
 
   cartItemIds: boolean[] = [];
-  allSelected = this.cartItemIds.every(e => Boolean(e));
+
+  get allSelected() {
+    return this.cartItemIds.every(e => Boolean(e));
+  }
 
   @Mutation
   initCartItemIds() {
-    this.cartItemIds = this.cartProducts.map(e => false);
+    this.cartItemIds = this.cartProducts.map(() => false);
   }
 
   @Mutation
   selectAll() {
-    console.log("mutation to select");
-    if (this.allSelected) {
-      console.log("allSelected true");
-      this.cartItemIds = this.cartProducts.map(e => false);
-      this.allSelected = this.cartItemIds.every(e => Boolean(e));
+    const checkAll = this.cartItemIds.every(e => Boolean(e));
+    if (checkAll) {
+      this.cartItemIds = this.cartProducts.map(() => false);
     } else {
-      console.log("allSelected false");
-      this.cartItemIds = this.cartProducts.map(e => true);
-      this.allSelected = this.cartItemIds.every(e => Boolean(e));
+      this.cartItemIds = this.cartProducts.map(() => true);
     }
   }
 
   @Mutation
-  select() {
-    this.allSelected = false;
+  toggleOneItem(index: number) {
+    this.cartItemIds = this.cartItemIds.map((item, idx) => {
+      if (idx === index) {
+        return !item;
+      } else {
+        return item;
+      }
+    });
   }
 
   @Mutation
   setCartState(cartState: CartPayload) {
     if (cartState.products) {
       this.cartProducts = cartState.products;
-      this.cartItemIds = this.cartProducts.map(e => false);
-      this.allSelected = this.cartItemIds.every(e => Boolean(e));
+      this.cartItemIds = this.cartProducts.map(() => false);
     }
     this.quantity = cartState.quantity;
     this.sum = cartState.sum;

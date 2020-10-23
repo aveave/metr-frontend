@@ -64,6 +64,7 @@ export default class Footer extends Vue {}
 
 <style>
 .main-footer {
+  height: 184px;
   background-color: #f3f3f3;
   color: #231f20;
   font-size: 16px;
@@ -76,7 +77,6 @@ export default class Footer extends Vue {}
 .main-footer ul {
   padding: 0;
   margin: 0;
-  list-style-type: none;
 }
 
 .main-footer a {
