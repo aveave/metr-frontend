@@ -1,57 +1,55 @@
 <template>
-  <footer class="main-footer">
-    <div class="width-limiter">
-      <b-container fluid>
-        <b-row>
-          <b-col>
-            <b-nav align="center">
-              <ul>
-                <p>Каталог</p>
-                <li><a href="#">Каталог по брендам</a></li>
-                <li><a href="#">Заказ по прайсу</a></li>
-                <li><a href="#">Новинки</a></li>
-                <li><a href="#">Акции</a></li>
-              </ul>
-            </b-nav>
-          </b-col>
-          <b-col>
-            <b-nav align="center">
-              <ul>
-                <p>О компании</p>
-                <li><a href="#">Документы</a></li>
-                <li><a href="#">Реквизиты</a></li>
-                <li><a href="#">Контакты</a></li>
-                <li><a href="#">О нас</a></li>
-              </ul>
-            </b-nav>
-          </b-col>
-          <b-col>
-            <b-nav align="center">
-              <ul>
-                <p>Информация</p>
-                <li><a href="#">Оплата и доставка</a></li>
-                <li><a href="#">Вопросы и ответы</a></li>
-                <li><a href="#">Новости</a></li>
-                <li>
-                  <a href="#">Политика защиты <br />персональных данных</a>
-                </li>
-              </ul>
-            </b-nav>
-          </b-col>
-          <b-col align-self="center">
-            <b-row>
-              <p>+7(473) 246-07-07</p>
-            </b-row>
-            <b-row>
-              <p id="address">
-                г. Воронеж ул Еремеева 17 <br />
-                © 2018 OOO “Мэтр”
-              </p>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-container>
-    </div>
+  <footer class="main-footer width-limiter">
+    <b-container fluid>
+      <b-row>
+        <b-col>
+          <b-nav align="center">
+            <ul>
+              <p>Каталог</p>
+              <li><a href="#">Каталог по брендам</a></li>
+              <li><a href="#">Заказ по прайсу</a></li>
+              <li><a href="#">Новинки</a></li>
+              <li><a href="#">Акции</a></li>
+            </ul>
+          </b-nav>
+        </b-col>
+        <b-col>
+          <b-nav align="center">
+            <ul>
+              <p>О компании</p>
+              <li><a href="#">Документы</a></li>
+              <li><a href="#">Реквизиты</a></li>
+              <li><a href="#">Контакты</a></li>
+              <li><a href="#">О нас</a></li>
+            </ul>
+          </b-nav>
+        </b-col>
+        <b-col>
+          <b-nav align="center">
+            <ul>
+              <p>Информация</p>
+              <li><a href="#">Оплата и доставка</a></li>
+              <li><a href="#">Вопросы и ответы</a></li>
+              <li><a href="#">Новости</a></li>
+              <li>
+                <a href="#">Политика защиты <br />персональных данных</a>
+              </li>
+            </ul>
+          </b-nav>
+        </b-col>
+        <b-col align-self="center">
+          <b-row>
+            <p>+7(473) 246-07-07</p>
+          </b-row>
+          <b-row>
+            <p id="address">
+              г. Воронеж ул Еремеева 17 <br />
+              © 2018 OOO “Мэтр”
+            </p>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
   </footer>
 </template>
 

@@ -1,19 +1,36 @@
 <template>
-  <div class="width-limiter height-limiter order-list">
-    <b-container class="order-list-form" fluid>
-      <h1 class="order-header">Заказы</h1>
-      <b-row class="order-form">
-        <Order v-for="order in paginatedList" :key="order.id" :order="order" />
-      </b-row>
-      <b-pagination
-        v-model="pageNumber"
-        :total-rows="pageCount"
-        :per-page="perPage"
-        align="right"
-      ></b-pagination>
+  <b-container class="width-limiter height-limiter" fluid>
+    <b-row class="order-list-form">
+      <b-col>
+        <b-row>
+          <h1 class="order-header">Заказы</h1>
+        </b-row>
+        <b-row class="order-form">
+          <Order
+            v-for="order in paginatedList"
+            :key="order.id"
+            :order="order"
+          />
+        </b-row>
+        <b-row align-h="end">
+          <b-pagination
+            class="list-pagination"
+            v-if="pageCount > 1"
+            v-model="pageNumber"
+            :total-rows="pageCount"
+            :per-page="perPage"
+            hide-goto-end-buttons
+            hide-ellipsis
+            limit="3"
+          ></b-pagination>
+        </b-row>
+      </b-col>
+    </b-row>
+    <!-- <EmptyOrderList v-if="paginatedList.length == 0" /> -->
+    <b-row>
       <SuggestedList header="Рекомендуем" :suggestedList="suggestedList" />
-    </b-container>
-  </div>
+    </b-row>
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -29,13 +46,13 @@ import order from "@/store/modules/order/order";
     SuggestedList
   }
 })
-export default class OrderList extends Vue {
+export default class Orders extends Vue {
   pageNumber = 1;
   displayedAmount = 3;
   perPage = 1;
 
   get pageCount() {
-    const l = this.orderList.length,
+    const l = this.orderList?.length,
       s = this.displayedAmount;
     return Math.ceil(l / s);
   }
@@ -43,11 +60,11 @@ export default class OrderList extends Vue {
   get paginatedList() {
     const start = (this.pageNumber - 1) * this.displayedAmount,
       end = start + this.displayedAmount;
-    return this.orderList.slice(start, end);
+    return this.orderList?.slice(start, end);
   }
 
-  suggestedList() {
-    this.$store.state.specialOffer.suggestedProducts;
+  get suggestedList() {
+    return this.$store.state.specialOffer.suggestedProducts;
   }
 
   get orderList() {
@@ -67,6 +84,7 @@ export default class OrderList extends Vue {
 }
 
 .order-list-form {
+  background-color: #f3f3f3;
   padding: 53px;
 }
 

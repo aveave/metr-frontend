@@ -1,11 +1,11 @@
 <template>
-  <div class="width-limiter height-limiter">
-    <b-container fluid class="cart-view">
+  <b-container class="width-limiter height-limiter cart-view" fluid>
+    <div v-if="cartItems.length > 0">
       <h2>Корзина</h2>
       <b-row class="cart" align-h="around">
         <b-col cols="8" class="cart-content">
           <b-row class="cart-header" align-content="center">
-            <b-col>
+            <b-col cols="2">
               <input
                 id="selectAllItems"
                 type="checkbox"
@@ -15,11 +15,10 @@
 
               <label for="selectAllItems">Выделить всё</label>
             </b-col>
-            <b-col offset-sm="1">
+            <b-col>
               <b-link href="#">Удалить выбранное</b-link>
             </b-col>
           </b-row>
-
           <CartItem
             v-for="(cartItem, index) in cartItems"
             :key="index"
@@ -27,7 +26,6 @@
             @input="toggleOne(index)"
             :cartItem="cartItem"
           />
-          <hr />
         </b-col>
 
         <b-col cols="3" class="cart-content" align-self="baseline">
@@ -37,10 +35,10 @@
           <ProceedOrder />
         </b-col>
       </b-row>
-      <EmptyCart v-if="cartItems.length == 0" />
-      <SuggestedList header="Рекомендуем" :suggestedList="suggestedList" />
-    </b-container>
-  </div>
+    </div>
+    <EmptyCart v-if="cartItems.length == 0" />
+    <SuggestedList header="Рекомендуем" :suggestedList="suggestedList" />
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -114,6 +112,11 @@ export default class Cart extends Vue {
 
 .cart {
   background-color: #f3f3f3;
+}
+
+.cart-header {
+  border-bottom: 2px solid #dedede;
+  padding: 10px 0px;
 }
 
 .cart-header a {

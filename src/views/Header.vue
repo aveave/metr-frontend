@@ -36,25 +36,27 @@
         </b-col>
 
         <b-col cols="3">
-          <button class="header-menu-button" @click="openProfile">
-            <img src="../assets/header/heart.svg" />
-            <div>Избранное</div>
-          </button>
+          <b-row align-h="end" class="header-btn">
+            <button class="header-menu-button" @click="openFavorites">
+              <img src="../assets/header/heart.svg" />
+              <div>Избранное</div>
+            </button>
 
-          <button class="header-menu-button" @click="openProfile">
-            <img src="../assets/header/user.svg" />
-            <div>Мой Мэтр</div>
-          </button>
+            <button class="header-menu-button" @click="openProfile">
+              <img src="../assets/header/user.svg" />
+              <div>Мой Мэтр</div>
+            </button>
 
-          <button class="header-menu-button" @click="openOrders">
-            <img src="../assets/header/group.svg" />
-            <div>Заказы</div>
-          </button>
+            <button class="header-menu-button" @click="openOrders">
+              <img src="../assets/header/group.svg" />
+              <div>Заказы</div>
+            </button>
 
-          <button class="header-menu-button" @click="openCart">
-            <img src="../assets/header/supermarket.svg" />
-            <div>Корзина</div>
-          </button>
+            <button class="header-menu-button" @click="openCart">
+              <img src="../assets/header/supermarket.svg" />
+              <div>Корзина</div>
+            </button>
+          </b-row>
         </b-col>
       </b-row>
       <b-row class="header-bottom-line">
@@ -147,6 +149,10 @@ export default class Header extends Vue {
       this.$root.$emit("bv::show::modal", "modal-login");
     }
   }
+
+  openFavorites() {
+    this.$router.push({ name: "favorites" });
+  }
 }
 </script>
 
@@ -154,8 +160,6 @@ export default class Header extends Vue {
 .header-container {
   height: 130px;
   padding-top: 28px;
-  padding-left: 40px;
-  padding-right: 40px;
   background-color: #ffffff;
 }
 
@@ -262,5 +266,9 @@ input::placeholder {
   letter-spacing: 0em;
   text-align: left;
   color: #9d9d9d;
+}
+
+.header-btn button {
+  margin: 0px 10px;
 }
 </style>

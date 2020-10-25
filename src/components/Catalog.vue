@@ -13,7 +13,6 @@
       active-nav-item-class="active-tab"
     >
       <b-tab
-        active
         v-for="catalogItem in mainCatalogItems"
         :key="catalogItem.id"
         :title="catalogItem.name"
@@ -27,7 +26,7 @@
             <a
               href="#"
               class="subCatalog"
-              @click="openCatalogView(subCatalogItem.id)"
+              @click="openCatalogView(subCatalogItem.id, catalogItem.name)"
               >{{ subCatalogItem.name }}</a
             >
             <div class="card-text">
@@ -94,13 +93,13 @@ export default class Catalog extends Vue {
       .map((item: CatalogItem) => item.name);
   }
 
-  openCatalogView(sectionId: string) {
+  openCatalogView(sectionId: string, groupName: string) {
     this.$root.$emit("bv::hide::modal", "modal-catalog");
     const catalogGroupInfo = this.relatedCatalogSubItems.get(sectionId);
     const groupInfo = catalogGroupInfo.map(({ id, name }) => ({ id, name }));
     this.$router.push({
       name: "catalogview",
-      params: { sectionId, groupInfo }
+      params: { sectionId, groupName, groupInfo }
     });
   }
 }
@@ -109,7 +108,8 @@ export default class Catalog extends Vue {
 <style>
 .modal-catalog-content {
   width: 1000px;
-  margin-top: 70px;
+  margin-top: 50px;
+  float: right;
 }
 
 .modal-catalog-content a:hover {

@@ -1,147 +1,131 @@
 <template>
-  <div class="width-limiter height-limiter">
-    <b-container class="checkout-form" fluid>
-      <h2>Оформление заказа</h2>
-      <b-row>
-        <b-col cols="8" class="checkout-col checkout-block">
-          <h5>Адрес доставки</h5>
-          <b-row class="checkout-info-form">
-            <b-col>
-              <div>
-                <label for="name">Имя</label>
-                <input
-                  id="name"
-                  type="text"
-                  v-model="orderInfo.name"
-                  name="name"
-                />
-              </div>
-              <div>
-                <label for="surname">Фамилия</label>
-                <input
-                  id="surname"
-                  type="text"
-                  v-model="orderInfo.surname"
-                  name="name"
-                />
-              </div>
-              <div>
-                <label for="phoneNumber">Телефон</label>
-                <input
-                  id="phoneNumber"
-                  type="text"
-                  v-model="orderInfo.phoneNumber"
-                  name="name"
-                />
-              </div>
-            </b-col>
-
-            <b-col>
-              <div>
-                <label for="address">Адрес</label>
-                <input
-                  id="address"
-                  type="text"
-                  v-model="orderInfo.address"
-                  name="name"
-                />
-              </div>
-              <div>
-                <label for="city">Город</label>
-                <input
-                  id="city"
-                  type="text"
-                  v-model="orderInfo.city"
-                  name="name"
-                />
-              </div>
-              <div>
-                <label for="inn">ИНН</label>
-                <input
-                  id="inn"
-                  type="text"
-                  v-model="orderInfo.inn"
-                  name="name"
-                />
-              </div>
-            </b-col>
-          </b-row>
-        </b-col>
-
-        <b-col
-          cols="3"
-          class="checkout-col checkout-block"
-          align-self="baseline"
-        >
-          <button class="checkout-order" @click="checkout">
-            Оформить заказ
-          </button>
-          <ProceedOrder />
-        </b-col>
-      </b-row>
-
-      <b-row class="checkout-options">
-        <b-col cols="4" class="checkout-block first-block">
-          <h5>Доставка</h5>
-          <div>
-            <label for="delivery">Доставка</label>
+  <b-container class="width-limiter height-limiter checkout-form" fluid>
+    <h2>Оформление заказа</h2>
+    <b-row align-h="around">
+      <b-col cols="8" align-h="around">
+        <b-row class="checkout-block">
+          <b-col class="checkout-block-data">
+            <label for="name">Имя</label>
+            <input id="name" type="text" v-model="orderInfo.name" name="name" />
+            <label for="surname">Фамилия</label>
             <input
-              id="delivery"
-              type="radio"
-              value="1"
-              v-model="orderInfo.deliveryId"
+              id="surname"
+              type="text"
+              v-model="orderInfo.surname"
+              name="name"
             />
-          </div>
-          <div>
-            <label for="pickup">Самовывоз</label>
+            <label for="phoneNumber">Телефон</label>
             <input
-              id="pickup"
-              type="radio"
-              value="2"
-              v-model="orderInfo.deliveryId"
+              id="phoneNumber"
+              type="text"
+              v-model="orderInfo.phoneNumber"
+              name="name"
             />
-          </div>
-        </b-col>
-        <b-col
-          cols="4"
-          class="checkout-block"
-          style="background-color: #ffffff;"
-        >
-          <h5>Оплата</h5>
-          <div>
-            <label for="payByCard">Карта</label>
+          </b-col>
+          <b-col class="checkout-block-data">
+            <label for="address">Адрес</label>
             <input
-              id="payByCard"
-              type="radio"
-              value="1"
-              v-model="orderInfo.paymentId"
+              id="address"
+              type="text"
+              v-model="orderInfo.address"
+              name="name"
             />
-          </div>
-          <div>
-            <label for="cash">Наличные</label>
-            <input
-              id="cash"
-              type="radio"
-              value="2"
-              v-model="orderInfo.paymentId"
-            />
-          </div>
-        </b-col>
-      </b-row>
+            <label for="city">Город</label>
+            <input id="city" type="text" v-model="orderInfo.city" name="name" />
+            <label for="inn">ИНН</label>
+            <input id="inn" type="text" v-model="orderInfo.inn" name="name" />
+          </b-col>
+        </b-row>
 
-      <b-row class="checkout-block mail-block">
-        <b-col cols="4" align-self="stretch">
-          <p>Адрес электронной почты</p>
-          <input
-            id="email"
-            type="text"
-            v-model="orderInfo.email"
-            name="email"
-          />
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+        <b-row class="checkout-form">
+          <b-col class="checkout-block-first checkout-block-select">
+            <h5>Доставка</h5>
+            <b-row align-v="baseline">
+              <b-col>
+                <label for="delivery">Доставка</label>
+              </b-col>
+              <b-col>
+                <input
+                  id="delivery"
+                  type="radio"
+                  value="1"
+                  v-model="orderInfo.deliveryId"
+                />
+              </b-col>
+            </b-row>
+            <b-row align-v="baseline">
+              <b-col>
+                <label for="pickup">Самовывоз</label>
+              </b-col>
+              <b-col>
+                <input
+                  id="pickup"
+                  type="radio"
+                  value="2"
+                  v-model="orderInfo.deliveryId"
+                />
+              </b-col>
+            </b-row>
+          </b-col>
+          <b-col class="checkout-block checkout-block-select">
+            <h5>Оплата</h5>
+            <b-row align-v="baseline">
+              <b-col>
+                <label for="payByCard">Карта</label>
+              </b-col>
+              <b-col>
+                <input
+                  id="payByCard"
+                  type="radio"
+                  value="1"
+                  v-model="orderInfo.paymentId"
+                />
+              </b-col>
+            </b-row>
+            <b-row align-v="baseline">
+              <b-col>
+                <label for="cash">Наличные</label>
+              </b-col>
+              <b-col>
+                <input
+                  id="cash"
+                  type="radio"
+                  value="2"
+                  v-model="orderInfo.paymentId"
+                />
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+        <b-row class="checkout-form">
+          <b-col class="checkout-block-first">
+            <p>Адрес электронной почты</p>
+            <input
+              id="email"
+              type="text"
+              v-model="orderInfo.email"
+              name="email"
+            />
+          </b-col>
+          <b-col class="checkout-block">
+            <p>Комментарий к заказу</p>
+            <input
+              id="comment"
+              type="text"
+              v-model="orderInfo.comment"
+              name="comment"
+            />
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col cols="3" class="checkout-block" align-self="baseline">
+        <button class="checkout-order" @click="checkout">
+          Оформить заказ
+        </button>
+        <ProceedOrder />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -176,51 +160,39 @@ export default class Checkout extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .checkout-form {
   background-color: #f3f3f3;
 }
 
+.checkout-block-first {
+  background-color: #ffffff;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+
 .checkout-block {
   background-color: #ffffff;
+  padding: 20px;
+  margin-top: 20px;
 }
 
-.first-block {
-  margin: 0px 20px;
+.checkout-block-data {
+  padding: 20px;
 }
 
-.mail-block {
-  margin: 10px 5px;
-}
-
-.checkout-info-form input,
-label {
+.checkout-block-data label,
+input {
   display: block;
 }
 
-.checkout-info-form div {
-  margin: 5px 0px;
-}
-
-.checkout-options input,
-label {
-  display: inline;
-}
-
-.checkout-options label {
-  margin-right: 20px;
-}
-
-.checkout-col {
-  margin: 20px;
-}
-
-.checkout-block {
+.checkout-block-select label,
+input {
   display: block;
 }
 
 .checkout-order {
-  margin-top: 10px;
   width: 100%;
 }
 </style>

@@ -6,8 +6,13 @@ import {
   Mutation
 } from "vuex-module-decorators";
 import store from "@/store";
-import { addOrder, getOrders } from "../../api";
-import { OrderInfo, OrderEntity } from "../../models";
+import { addOrder, getOrders, getOrderItems } from "../../api";
+import {
+  OrderInfo,
+  OrderEntity,
+  OrderItemEntity,
+  OrderData
+} from "../../models";
 
 @Module({
   namespaced: true,
@@ -17,8 +22,12 @@ import { OrderInfo, OrderEntity } from "../../models";
 })
 class OrderModule extends VuexModule {
   orderInfo: OrderInfo | null = null;
-
   orderList: OrderEntity[] | null = null;
+
+  orderId = 0;
+  orderSum = "";
+  orderDate = "";
+  orderItems: OrderItemEntity[] = [];
 
   @Mutation
   setOrder(orderInfo: OrderInfo) {
@@ -40,6 +49,20 @@ class OrderModule extends VuexModule {
   async uploadOrders() {
     const orderListResponse = await getOrders();
     return orderListResponse;
+  }
+
+  @Mutation
+  setOrderData(orderData: OrderData) {
+    this.orderId = orderData.id;
+    this.orderSum = orderData.sum;
+    this.orderDate = orderData.date;
+    this.orderItems = orderData.products;
+  }
+
+  @Action({ commit: "setOrderData" })
+  async uploadOrderItems(orderId: string) {
+    const orderDataResponse = await getOrderItems(orderId);
+    return orderDataResponse;
   }
 }
 

@@ -39,13 +39,19 @@ class UserModule extends VuexModule {
 
   @Mutation
   updateUserInfo(userInfo: UserInfo) {
-    this.userInfo = userInfo;
+    if (userInfo) {
+      this.userInfo = userInfo;
+    }
   }
 
   @Action({ commit: "updateUserInfo" })
   async savePersonal(userToUpdate: UserInfo) {
     const userInfo = await updateUser(userToUpdate);
-    return userInfo;
+    if (userInfo) {
+      return userToUpdate;
+    } else {
+      return null;
+    }
   }
 }
 

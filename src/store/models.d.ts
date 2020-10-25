@@ -97,8 +97,18 @@ export interface OrderEntity {
   sum: string;
 }
 
-export interface OrderItem {
+export interface OrderData {
+  date: string;
+  id: string;
+  products: OrderItemEntity[];
+  sum: string;
+}
+
+export interface OrderItemEntity {
   name: string;
+  picture: string;
+  price: string;
+  quantity: string;
 }
 
 export interface GroupedItem {

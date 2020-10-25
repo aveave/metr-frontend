@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-
 import Home from "@/views/Home.vue";
-import CatalogView from "@/views/CatalogView.vue";
 
 Vue.use(VueRouter);
 
@@ -10,7 +8,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/catalog",
     name: "catalogview",
-    component: CatalogView
+    component: () => import("@/views/CatalogView.vue")
   },
   {
     path: "/",
@@ -35,7 +33,17 @@ const routes: Array<RouteConfig> = [
   {
     path: "/orderlist",
     name: "orderlist",
-    component: () => import("@/views/OrderList.vue")
+    component: () => import("@/views/Orders.vue")
+  },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: () => import("@/views/Favorites.vue")
+  },
+  {
+    path: "/order",
+    name: "order",
+    component: () => import("@/views/OrderItems.vue")
   }
 ];
 

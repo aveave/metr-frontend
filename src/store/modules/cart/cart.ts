@@ -104,15 +104,23 @@ class CartModule extends VuexModule {
 
   @Mutation
   updateCartAfterDelete(cartItem: CartItemEntity) {
-    this.cartProducts = this.cartProducts.filter(
-      item => item.productId != cartItem.productId
-    );
+    if (cartItem) {
+      this.quantity--;
+      this.sum = this.sum - cartItem.quantity * cartItem.price;
+      this.cartProducts = this.cartProducts.filter(
+        item => item.productId != cartItem.productId
+      );
+    }
   }
 
   @Action({ commit: "updateCartAfterDelete" })
   async deleteCartItem(cartItem: CartItemEntity) {
     const deleteCartResponse = await deleteFromCart(cartItem.productId);
-    return deleteCartResponse;
+    if (deleteCartResponse) {
+      return cartItem;
+    } else {
+      return null;
+    }
   }
 }
 

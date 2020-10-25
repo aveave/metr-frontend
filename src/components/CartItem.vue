@@ -1,49 +1,51 @@
 <template>
-  <b-container fluid class="cart-item">
-    <hr />
-    <b-row>
-      <b-col cols="2">
-        <b-row align-v="center">
+  <b-row class="cart-item" align-v="center">
+    <b-col cols="2">
+      <b-row align-v="center">
+        <b-col>
           <input
             id="cart-select-checkbox"
             type="checkbox"
             :checked="value"
             @change="toggle"
           />
+        </b-col>
+        <b-col>
           <img :src="cartItem.picture" alt="product" style="width: 60px;" />
-        </b-row>
-      </b-col>
-      <b-col cols="6" align-v="center" align-h="center" align-content="center">
-        <b-row>
-          <b-col>
-            <p>{{ cartItem.name }}</p>
+        </b-col>
+      </b-row>
+    </b-col>
 
-            <p>Код: {{ cartItem.productId }}</p>
+    <b-col>
+      <b-row>
+        <b-col>
+          <p>{{ cartItem.name }}</p>
 
-            <p class="cart-price">
-              {{ cartItem.price }} <img src="../assets/cart/currency.svg" />
-            </p>
-          </b-col>
-        </b-row>
+          <p>Код: {{ cartItem.productId }}</p>
 
-        <b-row align-v="center">
-          <b-col>
+          <p class="cart-price">
+            {{ cartItem.price }} <img src="../assets/cart/currency.svg" />
+          </p>
+        </b-col>
+      </b-row>
+      <b-row align-v="center">
+        <b-col cols="6">
+          <b-row align-h="around">
             <b-link href="#">В избранное</b-link>
-          </b-col>
-          <b-col offset-md="1">
             <b-link href="#" @click="deleteItemFromCart">Удалить</b-link>
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col>
-        <select class="cart-count-btn" v-model="selected">
-          <option v-for="n in cartItem.quantity" :key="n" :value="n">{{
-            n
-          }}</option>
-        </select>
-      </b-col>
-    </b-row>
-  </b-container>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-col>
+
+    <b-col>
+      <select class="cart-count-btn" v-model="selected">
+        <option v-for="n in cartItem.quantity" :key="n" :value="n">{{
+          n
+        }}</option>
+      </select>
+    </b-col>
+  </b-row>
 </template>
 
 <script lang="ts">
@@ -57,10 +59,8 @@ import cart from "@/store/modules/cart/cart";
 export default class CartItem extends Vue {
   cartSelect = false;
 
-  data() {
-    return {
-      selected: this.cartItem.quantity
-    };
+  get selected() {
+    return this.cartItem.quantity;
   }
 
   @Prop() cartItem?: CartItemEntity;
@@ -77,6 +77,11 @@ export default class CartItem extends Vue {
 </script>
 
 <style>
+.cart-item {
+  border-bottom: 2px solid #dedede;
+  padding: 15px 0px;
+}
+
 .cart-item a {
   color: #ef9a41;
 }
@@ -84,5 +89,14 @@ export default class CartItem extends Vue {
 .cart-price {
   font-weight: 700;
   font-size: 16px;
+}
+
+.cart-count-btn {
+  width: 80px;
+  height: 33px;
+  background: #ffffff;
+  border: 1.5px solid #dedede;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 </style>
