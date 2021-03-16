@@ -3,6 +3,12 @@
     <b-tabs content-class="mt-3" fill>
       <b-tab title="Войти" active>
         <form ref="form" @submit.stop.prevent="handleSubmit">
+
+          <!-- <ValidationProvider rules="positive|odd" v-slot="{ errors }">
+            <input v-model="value" type="number">
+            <span>{{ errors[0] }}</span>
+          </ValidationProvider> -->
+          
           <b-form-input
             id="login-identifier-input"
             class="login-input"
@@ -81,8 +87,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import user from "@/store/modules/user/user";
-
-@Component
+import { mapGetters } from "vuex";
+@Component({
+  computed: {
+    ...mapGetters('user', {userInfo: 'getUserInfo'})
+  }
+})
 export default class Login extends Vue {
   registerName = "";
   registerEmail = "";
@@ -98,7 +108,7 @@ export default class Login extends Vue {
       email: this.loginIdentifier,
       password: this.loginPassword
     });
-    if (this.$store.state.user.userInfo.name) {
+    if (this.userInfo.name) {
       this.$root.$emit("bv::hide::modal", "modal-login");
     }
   }
@@ -109,7 +119,7 @@ export default class Login extends Vue {
       email: this.registerEmail,
       password: this.registerPassword
     });
-    if (this.$store.state.user.userInfo.name) {
+    if (this.userInfo.name) {
       this.$root.$emit("bv::hide::modal", "modal-login");
     }
   }

@@ -16,13 +16,13 @@
               <label for="selectAllItems">Выделить всё</label>
             </b-col>
             <b-col>
-              <b-link href="#">Удалить выбранное</b-link>
+              <a href="#" @click="deleteSelected">Удалить выбранное</a>
             </b-col>
           </b-row>
           <CartItem
             v-for="(cartItem, index) in cartItems"
             :key="index"
-            :value="cartItemids[index]"
+            :value="cartItemIds[index]"
             @input="toggleOne(index)"
             :cartItem="cartItem"
           />
@@ -51,6 +51,7 @@ import EmptyCart from "@/components/EmptyCart.vue";
 
 import specialOffer from "@/store/modules/offer/special-offer";
 import cart from "@/store/modules/cart/cart";
+import { mapGetters } from 'vuex';
 
 @Component({
   components: {
@@ -59,31 +60,19 @@ import cart from "@/store/modules/cart/cart";
     SuggestedList,
     ProceedOrder,
     EmptyCart
+  },
+  computed: {
+    ...mapGetters('cart', {cartItems: 'getProducts'}), 
+    ...mapGetters('cart', {quantity: 'getQuantity'}),
+    ...mapGetters('cart', {sum: 'getSum'}),
+    ...mapGetters('cart', {cartItemIds: 'getCartItemIds'}),
+    ...mapGetters('specialOffer', {suggestedList: 'getSuggestedProducts'})              
   }
 })
 export default class Cart extends Vue {
+  
   get allSelected() {
     return cart.allSelected;
-  }
-
-  get cartItemids() {
-    return this.$store.state.cart.cartItemIds;
-  }
-
-  get suggestedList() {
-    return this.$store.state.specialOffer.suggestedProducts;
-  }
-
-  get cartItems() {
-    return this.$store.state.cart.cartProducts;
-  }
-
-  get quantity() {
-    return this.$store.state.cart.quantity;
-  }
-
-  get sum() {
-    return this.$store.state.cart.sum;
   }
 
   created() {
@@ -97,6 +86,10 @@ export default class Cart extends Vue {
 
   toggleOne(index: number) {
     cart.toggleOneItem(index);
+  }
+
+  deleteSelected() {
+    cart.deleteSelectedItems();
   }
 
   checkout() {

@@ -115,20 +115,21 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Login from "./Login.vue";
-import Catalog from "@/components/Catalog.vue";
+import Login from "@/views/Login.vue";
+import Catalog from "./Catalog.vue";
+import { mapGetters } from "vuex";
 
 @Component({
   name: "Header",
   components: {
     Login,
     Catalog
+  },
+  computed: {
+    ...mapGetters('user', {userInfo: 'getUserInfo'})
   }
 })
 export default class Header extends Vue {
-  get user() {
-    return this.$store.state.user.userInfo;
-  }
 
   openCart() {
     this.$router.push({ name: "cart" });
@@ -143,7 +144,7 @@ export default class Header extends Vue {
   }
 
   openProfile() {
-    if (this.user) {
+    if (this.userInfo) {
       this.$router.push({ name: "personal" });
     } else {
       this.$root.$emit("bv::show::modal", "modal-login");

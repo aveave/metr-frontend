@@ -125,18 +125,21 @@
         <ProceedOrder />
       </b-col>
     </b-row>
+    <OrderModal />
   </b-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ProceedOrder from "@/components/ProceedOrder.vue";
+import OrderModal from "@/components/modals/OrderModal.vue";
 import order from "@/store/modules/order/order";
 import { OrderInfo } from "@/store/models";
 
 @Component({
   components: {
-    ProceedOrder
+    ProceedOrder,
+    OrderModal
   }
 })
 export default class Checkout extends Vue {
@@ -155,7 +158,10 @@ export default class Checkout extends Vue {
   };
 
   checkout() {
-    order.createOrder(this.orderInfo);
+    const result = order.createOrder(this.orderInfo);
+    if (result) {
+      this.$root.$emit("bv::show::modal", "modal-order");
+    }
   }
 }
 </script>

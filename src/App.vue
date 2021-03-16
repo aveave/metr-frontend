@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Header from "./views/Header.vue";
-import Footer from "./views/Footer.vue";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 export default Vue.extend({
   name: "App",
 

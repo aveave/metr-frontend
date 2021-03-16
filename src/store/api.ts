@@ -49,14 +49,10 @@ export async function getCartResponse() {
 export async function addItemToCart(
   bookedItem: BookedItem
 ): Promise<BookItemResponse | undefined> {
-  try {
     const response = await shopApi.post("/cart", {
       bookedItem
     });
     return response.data as BookItemResponse;
-  } catch (e) {
-    console.log(e);
-  }
 }
 
 export async function deleteFromCart(cartItemId: string) {
@@ -112,4 +108,9 @@ export async function getFavoriteProducts() {
 export async function getOrderItems(orderId: string): Promise<OrderData> {
   const orderItemsResponse = await shopApi.get("/orders/" + orderId);
   return orderItemsResponse.data;
+}
+
+export async function deleteSelectedFromCart(selectedIds: string[]) {
+  const deleteSelectedResponse = true;
+  return deleteSelectedResponse;
 }

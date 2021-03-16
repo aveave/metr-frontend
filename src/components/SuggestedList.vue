@@ -38,7 +38,7 @@ export default class SuggestedList extends Vue {
   displayAmount = 6;
 
   @Prop(String) header: string | undefined;
-  @Prop() suggestedList?: Product[];
+  @Prop() suggestedList: Product[];
 
   get pageCount() {
     return Math.ceil(this.suggestedList.length / this.displayAmount);

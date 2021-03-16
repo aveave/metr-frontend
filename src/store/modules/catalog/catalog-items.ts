@@ -6,7 +6,7 @@ import {
   Action
 } from "vuex-module-decorators";
 import { CatalogItem, GroupedItem } from "../../models";
-import * as api from "../../api";
+import { getCatalogItems, getGroupedItems } from "../../api";
 import store from "@/store";
 
 @Module({
@@ -32,13 +32,13 @@ class CatalogItemsModule extends VuexModule {
 
   @Action({ commit: "setCatalogItems" })
   async uploadCatalogItems() {
-    const itemsFromCatalog = await api.getCatalogItems();
+    const itemsFromCatalog = await getCatalogItems();
     return itemsFromCatalog;
   }
 
   @Action({ commit: "setGroupedItems" })
   async uploadGroupedItems(sectionId: string) {
-    const groupedItemsResponse = await api.getGroupedItems(sectionId);
+    const groupedItemsResponse = await getGroupedItems(sectionId);
     return groupedItemsResponse;
   }
 }

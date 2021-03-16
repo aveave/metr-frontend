@@ -18,6 +18,10 @@ import store from "@/store";
 class FavoritesModule extends VuexModule {
   favoriteProducts: Product[] = [];
 
+  get getFavoriteProducts() {
+    return this.favoriteProducts;
+  }
+
   @Mutation
   setFavoriteProducts(favoriteProducts: Product[]) {
     this.favoriteProducts = favoriteProducts;

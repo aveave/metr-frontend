@@ -14,16 +14,17 @@
 import { Vue, Component } from "vue-property-decorator";
 import favorites from "@/store/modules/favorites/favorites";
 import Card from "@/components/Card.vue";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     Card
+  },
+  computed: {
+    ...mapGetters('favorites', {favoriteProducts: 'getFavoriteProducts'})
   }
 })
 export default class Favorites extends Vue {
-  get favoriteProducts() {
-    return this.$store.state.favorites.favoriteProducts;
-  }
 
   created() {
     favorites.uploadFavoriteProducts();

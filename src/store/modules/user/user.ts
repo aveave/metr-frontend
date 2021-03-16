@@ -19,6 +19,10 @@ import store from "@/store";
 class UserModule extends VuexModule {
   userInfo: UserInfo | null = null;
 
+  get getUserInfo() {
+    return this.userInfo;
+  }
+
   @Mutation
   setUserInfo(userInfo: UserInfo) {
     this.userInfo = userInfo;

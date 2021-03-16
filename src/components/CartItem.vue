@@ -63,7 +63,7 @@ export default class CartItem extends Vue {
     return this.cartItem.quantity;
   }
 
-  @Prop() cartItem?: CartItemEntity;
+  @Prop() cartItem: CartItemEntity;
   @Prop(Boolean) value: boolean | undefined;
 
   deleteItemFromCart() {

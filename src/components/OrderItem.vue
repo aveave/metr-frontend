@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { OrderItemEntity } from "@/store/models";
 
 @Component
 export default class OrderItem extends Vue {

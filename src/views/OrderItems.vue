@@ -31,7 +31,7 @@
         </b-row>
       </b-col>
     </b-row>
-    <SuggestedList header="Рекомендуем" :suggestedList="suggestedList" />
+    <SuggestedList header="Рекомендуем" :suggestedList="suggestedProducts" />
   </b-container>
 </template>
 
@@ -40,33 +40,22 @@ import { Vue, Component } from "vue-property-decorator";
 import OrderItem from "@/components/OrderItem.vue";
 import SuggestedList from "@/components/SuggestedList.vue";
 import order from "@/store/modules/order/order";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     OrderItem,
     SuggestedList
+  },
+  computed: {
+    ...mapGetters('order', {orderItems: 'getOrderItems'}),
+    ...mapGetters('order', {orderSum: 'getOrderSum'}),
+    ...mapGetters('order', {orderDate: 'getOrderDate'}),
+    ...mapGetters('order', {orderId: 'getOrderId'}),
+    ...mapGetters('specialOffer', {suggestedProducts: 'getSuggestedProducts'}),
   }
 })
 export default class OrderItems extends Vue {
-  get orderItems() {
-    return this.$store.state.order.orderItems;
-  }
-
-  get orderSum() {
-    return this.$store.state.order.orderSum;
-  }
-
-  get orderDate() {
-    return this.$store.state.order.orderDate;
-  }
-
-  get orderId() {
-    return this.$store.state.order.orderId;
-  }
-
-  get suggestedList() {
-    return this.$store.state.specialOffer.suggestedProducts;
-  }
 
   async created() {
     await order.uploadOrderItems(this.$route.params.orderId);

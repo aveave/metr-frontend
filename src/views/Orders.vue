@@ -26,9 +26,8 @@
         </b-row>
       </b-col>
     </b-row>
-    <!-- <EmptyOrderList v-if="paginatedList.length == 0" /> -->
     <b-row>
-      <SuggestedList header="Рекомендуем" :suggestedList="suggestedList" />
+      <SuggestedList header="Рекомендуем" :suggestedList="suggestedProducts" />
     </b-row>
   </b-container>
 </template>
@@ -39,11 +38,16 @@ import specialOffer from "@/store/modules/offer/special-offer";
 import Order from "@/components/Order.vue";
 import SuggestedList from "@/components/SuggestedList.vue";
 import order from "@/store/modules/order/order";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     Order,
     SuggestedList
+  },
+  computed: {
+    ...mapGetters('order', {orderList: 'getOrderList'}),
+    ...mapGetters('specialOffer', {suggestedProducts: 'getSuggestedProducts'})
   }
 })
 export default class Orders extends Vue {
@@ -61,14 +65,6 @@ export default class Orders extends Vue {
     const start = (this.pageNumber - 1) * this.displayedAmount,
       end = start + this.displayedAmount;
     return this.orderList?.slice(start, end);
-  }
-
-  get suggestedList() {
-    return this.$store.state.specialOffer.suggestedProducts;
-  }
-
-  get orderList() {
-    return this.$store.state.order.orderList;
   }
 
   async created() {

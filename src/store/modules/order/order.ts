@@ -24,10 +24,30 @@ class OrderModule extends VuexModule {
   orderInfo: OrderInfo | null = null;
   orderList: OrderEntity[] | null = null;
 
-  orderId = 0;
+  orderId = "";
   orderSum = "";
   orderDate = "";
   orderItems: OrderItemEntity[] = [];
+
+  get getOrderId() {
+    return this.orderId;
+  }
+
+  get getOrderSum() {
+    return this.orderSum;
+  }
+
+  get getOrderDate() {
+    return this.orderDate;
+  }
+  
+  get getOrderItems() {
+    return this.orderItems;
+  }
+
+  get getOrderList() {
+    return this.orderList;
+  }
 
   @Mutation
   setOrder(orderInfo: OrderInfo) {

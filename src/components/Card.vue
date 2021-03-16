@@ -49,7 +49,7 @@ import cart from "@/store/modules/cart/cart";
 export default class Card extends Vue {
   quantity = 1;
 
-  @Prop() product?: Product;
+  @Prop() product: Product;
 
   addToCart() {
     cart.saveItemInBusket({

@@ -75,11 +75,14 @@
 import { Vue, Component } from "vue-property-decorator";
 import { UserInfo } from "@/store/models";
 import user from "@/store/modules/user/user";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters('user', { userInfo: 'getUserInfo' })
+  }
+})
 export default class Personal extends Vue {
-  userInfo: UserInfo = this.$store.state.user.userInfo;
-
   savePersonalInfo() {
     user.savePersonal(this.userInfo);
   }

@@ -6,7 +6,7 @@ import {
   Action
 } from "vuex-module-decorators";
 import { Product } from "../../models";
-import * as api from "../../api";
+import { getSuggestedProducts } from "../../api";
 import store from "@/store";
 
 @Module({
@@ -18,6 +18,10 @@ import store from "@/store";
 class SpecialOfferModule extends VuexModule {
   suggestedProducts: Product[] = [];
 
+  get getSuggestedProducts() {
+    return this.suggestedProducts;
+  }
+
   @Mutation
   setSuggestedProducts(suggestedProducts: Product[]) {
     this.suggestedProducts = suggestedProducts;
@@ -25,7 +29,7 @@ class SpecialOfferModule extends VuexModule {
 
   @Action({ commit: "setSuggestedProducts" })
   async uploadSuggestedProducts() {
-    const suggestedProducts = await api.getSuggestedProducts();
+    const suggestedProducts = await getSuggestedProducts();
     return suggestedProducts;
   }
 }

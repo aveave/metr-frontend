@@ -6,7 +6,7 @@ import {
   Action
 } from "vuex-module-decorators";
 import { Product } from "../../models";
-import * as api from "../../api";
+import { getProducts } from "../../api";
 import store from "@/store";
 
 @Module({
@@ -25,7 +25,7 @@ class ProductsModule extends VuexModule {
 
   @Action({ commit: "setProducts" })
   async uploadProducts(sectionID: number, page: number) {
-    const products = await api.getProducts(sectionID, page);
+    const products = await getProducts(sectionID, page);
     return products;
   }
 }

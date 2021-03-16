@@ -14,43 +14,16 @@
             <a href="#">{{ group.name }}</a>
           </li>
         </ul>
-
         <h5>Цена</h5>
-        <div class="range-slider">
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            step="10"
-            v-model.number="minPrice"
-            @change="setRangeSlider"
-          />
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            step="10"
-            v-model.number="maxPrice"
-            @change="setRangeSlider"
-          />
-          <!-- <div>
-            <input type="text" v-model="minPrice" />
-            <p>{{ minPrice }} Руб</p>
-          </div>
-          <div>
-            <input type="text" v-model="maxPrice" />
-            <p>{{ maxPrice }} Руб</p>
-          </div> -->
-        </div>
-
+        <vue-slider v-model="rangePrice" :min="0" :max="10000" :lazy="true"></vue-slider>
         <b-row class="catalog-price" no-gutters>
           <b-col cols="6">
-            <input type="text" v-model="minPrice" />
-            <p>{{ minPrice }} Руб</p>
+            <input type="text" v-model="rangePrice[0]" />
+            <p>{{ rangePrice[0] }} Руб</p>
           </b-col>
           <b-col>
-            <input type="text" v-model="maxPrice" />
-            <p>{{ maxPrice }} Руб</p>
+            <input type="text" v-model="rangePrice[1]" />
+            <p>{{ rangePrice[1] }} Руб</p>
           </b-col>
         </b-row>
         <h5>Бренды</h5>
@@ -94,15 +67,7 @@
           />
         </b-row>
         <b-row align-h="end">
-          <b-pagination
-            v-if="pageCount > 1"
-            v-model="pageNumber"
-            :total-rows="pageCount"
-            :per-page="perPage"
-            align="right"
-            hide-goto-end-buttons
-            class="list-pagination"
-          ></b-pagination>
+          <pagination v-model="pageNumber" :records="paginatedLength" :per-page="selectedAmount"/>
         </b-row>
       </b-col>
     </b-row>
@@ -114,28 +79,31 @@ import { Component, Vue } from "vue-property-decorator";
 import catalog from "@/store/modules/catalog/catalog-items";
 import { GroupedItem, Product } from "@/store/models";
 import Card from "@/components/Card.vue";
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 
 @Component({
   components: {
-    Card
+    Card,
+    VueSlider
   }
 })
 export default class CatalogView extends Vue {
+  
   pageNumber = 1;
-  perPage = 1;
-
   selectedCategory = "По названию";
   selectedAmount = 10;
 
   catalogItems = new Map();
 
   displayedProducts: Product[] = [];
+  
+  paginatedLength = this.displayedProducts.length;
 
   categories = ["По названию", "По цене"];
   displayAmount = [20, 40, 60, 80];
 
-  minPrice = 0;
-  maxPrice = 1000;
+  rangePrice = [0, 1000];
 
   navigation = [
     {
@@ -160,23 +128,17 @@ export default class CatalogView extends Vue {
     return Math.ceil(this.displayedProducts.length / this.selectedAmount);
   }
 
-  // get paginatedProducts() {
-  //   const start = (this.pageNumber - 1) * this.selectedAmount,
-  //     end = start + this.selectedAmount;
-
-  //     return this.displayedProducts.slice(start,end);
-  // }
 
   get paginatedProducts() {
     const start = (this.pageNumber - 1) * this.selectedAmount,
       end = start + this.selectedAmount;
-    return this.displayedProducts
-      .filter(
+      const paginated = this.displayedProducts.filter(
         product =>
-          parseInt(product.price) >= this.minPrice &&
-          parseInt(product.price) <= this.maxPrice
+          parseInt(product.price) >= this.rangePrice[0] &&
+          parseInt(product.price) <= this.rangePrice[1]
       )
-      .slice(start, end);
+       this.paginatedLength = paginated.length;
+       return paginated.slice(start, end);
   }
 
   async created() {
@@ -194,14 +156,6 @@ export default class CatalogView extends Vue {
       );
       this.catalogItems.set(element.id, groupItems);
     });
-  }
-
-  setRangeSlider() {
-    if (this.minPrice > this.maxPrice) {
-      const tmp = this.maxPrice;
-      this.maxPrice = this.minPrice;
-      this.minPrice = tmp;
-    }
   }
 
   sortBySelectedCategory() {

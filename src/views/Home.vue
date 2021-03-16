@@ -1,8 +1,8 @@
 <template>
   <b-container class="width-limiter" fluid>
     <Carousel />
-    <SuggestedList header="Популярное" :suggestedList="suggestedList" />
-    <SuggestedList header="Новинки" :suggestedList="suggestedList" />
+    <SuggestedList header="Популярное" :suggestedList="suggestedProducts" />
+    <SuggestedList header="Новинки" :suggestedList="suggestedProducts" />
 
     <b-row class="start-page-block" align-h="end">
       <b-col>
@@ -37,20 +37,20 @@ import { Component, Vue } from "vue-property-decorator";
 import Card from "@/components/Card.vue";
 import Carousel from "@/components/Carousel.vue";
 import SuggestedList from "@/components/SuggestedList.vue";
-
 import specialOffer from "@/store/modules/offer/special-offer";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     Card,
     Carousel,
     SuggestedList
+  },
+  computed: {
+    ...mapGetters('specialOffer', { suggestedProducts: 'getSuggestedProducts'})
   }
 })
 export default class Home extends Vue {
-  get suggestedList() {
-    return this.$store.state.specialOffer.suggestedProducts;
-  }
 
   created() {
     specialOffer.uploadSuggestedProducts();

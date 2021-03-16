@@ -3,7 +3,7 @@
     <hr />
     <b-row>
       <b-col>
-        <p>Ваша коризна</p>
+        <p>Ваша корзина</p>
         <p>Общая стоимость</p>
       </b-col>
       <b-col>
@@ -16,16 +16,24 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters('cart', { sum: 'getSum', quantity: 'getQuantity'})
+  }
+})
 export default class ProceedOrder extends Vue {
-  get quantity() {
-    return this.$store.state.cart.quantity;
-  }
 
-  get sum() {
-    return this.$store.state.cart.sum;
-  }
+  // sum = 0;
+  // quantity = '';
+  // get quantity() {
+  //   return this.productsSum;
+  // }
+
+  // get sum() {
+  //   return this.productsQuantity;
+  // }
 }
 </script>
 
